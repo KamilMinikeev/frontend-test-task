@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="block">
+        <div class="block__start">
+
+
+            <svg width="60" height="60" class="circle-container">
+                <circle cx="30" cy="30" r="28" stroke="#9ABCFA" stroke-width="1" fill="none" id="blackCircle" />
+                <circle cx="30" cy="30" r="28" stroke="white" stroke-width="2" fill="none" id="whiteCircle" />
+                <text x="30" y="32" text-anchor="middle" font-size="20" fill="#fff">3/7</text>
+            </svg>
+
+
+            <div class="block__info">
+                <div class="block__subtitle">
+                    <span>Чеклист</span>
+                </div>
+                <h2 class="block__title">
+                    Выполнено: <span class="block__title-value">3</span> из 7 действий
+                </h2>
+                <p class="block__text">Следующее действие: Созвониться с клиентом до 23.05.24 12:00</p>
+            </div>
+        </div>
+        <div class="block__end">
+            <button class="block__button">Открыть чеклист</button>
+        </div>
+    </div>
+
+    <script>
+        const whiteCircle = document.getElementById('whiteCircle');
+
+        function updateCircleBorder(percentage) {
+            const circumference = 2 * Math.PI * whiteCircle.r.baseVal.value;
+            const dashLength = (circumference * percentage) / 100;
+            const dashGap = circumference - dashLength;
+
+            whiteCircle.setAttribute('stroke-dasharray', `${dashLength} ${dashGap}`);
+        }
+
+        // Получаем процент из CSS-переменной
+        const percentage = parseFloat(getComputedStyle(document.querySelector('.circle-container')).getPropertyValue('--percentage'));
+        updateCircleBorder(percentage);
+    </script>
+
+</body>
+
+</html>
